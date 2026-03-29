@@ -9,10 +9,11 @@ pnpm-lock.yaml
 .env.local
 .env.*.local
 
-# Build output
-dist
-build
-.next
+# Build output (never commit these)
+dist/
+build/
+.next/
+*.tsbuildinfo
 
 # IDE & Editor
 .vscode
