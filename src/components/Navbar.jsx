@@ -10,7 +10,6 @@ const NAV_LINKS = [
   { label: 'Skills',         id: 'skills' },
   { label: 'Certifications', id: 'certifications' },
   { label: 'Volunteering',   id: 'volunteering' },
-  { label: 'Contact',        id: 'contact' },
 ]
 
 export default function Navbar() {

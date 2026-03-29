@@ -66,39 +66,57 @@ export default function Skills() {
           </h2>
         </motion.div>
 
-        <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-5">
-          {skills.map((group, i) => {
-            const accent = CATEGORY_ACCENTS[group.category] ?? DEFAULT_ACCENT
-            return (
-              <motion.article
-                key={i}
-                initial={{ opacity: 0, y: 24 }}
-                animate={inView ? { opacity: 1, y: 0 } : {}}
-                transition={{ duration: 0.6, delay: i * 0.07, ease: [0.22, 1, 0.36, 1] }}
+        <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
+          {skills.map((skillGroup, idx) => (
+            <motion.div
+              key={idx}
+              initial={{ opacity: 0, y: 24 }}
+              animate={inView ? { opacity: 1, y: 0 } : {}}
+              transition={{ duration: 0.6, delay: idx * 0.1 }}
+              className="group relative overflow-hidden rounded-xl p-6 transition-all duration-300 hover:scale-105"
+              style={{
+                background: 'linear-gradient(135deg, rgba(26,26,46,0.6) 0%, rgba(26,26,46,0.2) 100%)',
+                border: '1px solid rgba(124,58,237,0.2)',
+                backdropFilter: 'blur(10px)',
+              }}
+              onMouseEnter={e => {
+                e.currentTarget.style.boxShadow = '0 20px 40px rgba(124,58,237,0.25)'
+                e.currentTarget.style.borderColor = 'rgba(124,58,237,0.5)'
+              }}
+              onMouseLeave={e => {
+                e.currentTarget.style.boxShadow = 'none'
+                e.currentTarget.style.borderColor = 'rgba(124,58,237,0.2)'
+              }}
+            >
+              <div
+                className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-300"
                 style={{
-                  background: '#1a1a2e',
-                  border: '1px solid rgba(124,58,237,0.2)',
-                  borderRadius: '12px',
-                  padding: '1.25rem',
+                  background: 'radial-gradient(circle at 50% 0%, rgba(124,58,237,0.1) 0%, transparent 70%)',
+                  pointerEvents: 'none',
                 }}
-                aria-label={`Skill category: ${group.category}`}
-              >
-                <h3
-                  className="text-xs font-semibold tracking-wider uppercase mb-4"
-                  style={{ color: accent.text, opacity: 0.8 }}
-                >
-                  {group.category}
-                </h3>
-                <div className="flex flex-wrap gap-1.5" role="list">
-                  {group.items.map(item => (
-                    <div key={item} role="listitem">
-                      <SkillBadge label={item} accent={accent} />
-                    </div>
-                  ))}
-                </div>
-              </motion.article>
-            )
-          })}
+              />
+
+              <h3 className="text-sm font-semibold mb-4 group-hover:text-accent transition-colors relative" style={{ color: '#e2e0ff' }}>
+                {skillGroup.category}
+              </h3>
+
+              <div className="space-y-2 relative">
+                {skillGroup.items.map((item, itemIdx) => (
+                  <motion.div
+                    key={itemIdx}
+                    initial={{ opacity: 0, x: -10 }}
+                    animate={inView ? { opacity: 1, x: 0 } : {}}
+                    transition={{ delay: idx * 0.1 + itemIdx * 0.03 }}
+                    className="flex items-center gap-2 text-xs group-hover:text-accent/90 transition-colors"
+                    style={{ color: 'rgba(226,224,255,0.6)' }}
+                  >
+                    <span className="w-1.5 h-1.5 rounded-full bg-accent/40 group-hover:bg-accent transition-colors" />
+                    {item}
+                  </motion.div>
+                ))}
+              </div>
+            </motion.div>
+          ))}
         </div>
       </div>
     </section>

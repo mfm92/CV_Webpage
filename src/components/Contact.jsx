@@ -121,24 +121,33 @@ export default function Contact() {
                 </button>
               </div>
             ) : (
-              <form onSubmit={handleSubmit(onSubmit)} className="space-y-4" noValidate>
-                <div className="grid sm:grid-cols-2 gap-4">
-                  <div>
-                    <label className="block text-xs font-medium text-white/40 mb-1.5">Name</label>
+              <form onSubmit={handleSubmit(onSubmit)} className="space-y-5" noValidate>
+                <div className="grid sm:grid-cols-2 gap-5">
+                  <motion.div
+                    initial={{ opacity: 0, y: 10 }}
+                    animate={inView ? { opacity: 1, y: 0 } : {}}
+                    transition={{ delay: 0.3 }}
+                  >
+                    <label className="block text-xs font-semibold text-white/50 mb-2 uppercase tracking-wide">Name</label>
                     <input
                       type="text"
                       placeholder="Your name"
                       {...register('name', { required: 'Name is required' })}
-                      className={`w-full bg-card border rounded-lg px-4 py-2.5 text-sm text-text placeholder-white/20 focus:outline-none focus:border-accent/50 transition-colors ${
+                      className={`w-full bg-card border rounded-lg px-4 py-3 text-sm text-text placeholder-white/20 focus:outline-none focus:border-accent/50 focus:ring-2 focus:ring-accent/20 transition-all duration-200 ${
                         errors.name ? 'border-rose-500/50' : 'border-white/[0.08]'
                       }`}
                     />
                     {errors.name && (
-                      <p className="text-xs text-rose-400 mt-1">{errors.name.message}</p>
+                      <p className="text-xs text-rose-400 mt-1.5">{errors.name.message}</p>
                     )}
-                  </div>
-                  <div>
-                    <label className="block text-xs font-medium text-white/40 mb-1.5">Email</label>
+                  </motion.div>
+                  
+                  <motion.div
+                    initial={{ opacity: 0, y: 10 }}
+                    animate={inView ? { opacity: 1, y: 0 } : {}}
+                    transition={{ delay: 0.35 }}
+                  >
+                    <label className="block text-xs font-semibold text-white/50 mb-2 uppercase tracking-wide">Email</label>
                     <input
                       type="email"
                       placeholder="your@email.com"
@@ -146,33 +155,41 @@ export default function Contact() {
                         required: 'Email is required',
                         pattern: { value: /^[^\s@]+@[^\s@]+\.[^\s@]+$/, message: 'Invalid email' },
                       })}
-                      className={`w-full bg-card border rounded-lg px-4 py-2.5 text-sm text-text placeholder-white/20 focus:outline-none focus:border-accent/50 transition-colors ${
+                      className={`w-full bg-card border rounded-lg px-4 py-3 text-sm text-text placeholder-white/20 focus:outline-none focus:border-accent/50 focus:ring-2 focus:ring-accent/20 transition-all duration-200 ${
                         errors.email ? 'border-rose-500/50' : 'border-white/[0.08]'
                       }`}
                     />
                     {errors.email && (
-                      <p className="text-xs text-rose-400 mt-1">{errors.email.message}</p>
+                      <p className="text-xs text-rose-400 mt-1.5">{errors.email.message}</p>
                     )}
-                  </div>
+                  </motion.div>
                 </div>
 
-                <div>
-                  <label className="block text-xs font-medium text-white/40 mb-1.5">Subject</label>
+                <motion.div
+                  initial={{ opacity: 0, y: 10 }}
+                  animate={inView ? { opacity: 1, y: 0 } : {}}
+                  transition={{ delay: 0.4 }}
+                >
+                  <label className="block text-xs font-semibold text-white/50 mb-2 uppercase tracking-wide">Subject</label>
                   <input
                     type="text"
                     placeholder="What's this about?"
                     {...register('subject', { required: 'Subject is required' })}
-                    className={`w-full bg-card border rounded-lg px-4 py-2.5 text-sm text-text placeholder-white/20 focus:outline-none focus:border-accent/50 transition-colors ${
+                    className={`w-full bg-card border rounded-lg px-4 py-3 text-sm text-text placeholder-white/20 focus:outline-none focus:border-accent/50 focus:ring-2 focus:ring-accent/20 transition-all duration-200 ${
                       errors.subject ? 'border-rose-500/50' : 'border-white/[0.08]'
                     }`}
                   />
                   {errors.subject && (
-                    <p className="text-xs text-rose-400 mt-1">{errors.subject.message}</p>
+                    <p className="text-xs text-rose-400 mt-1.5">{errors.subject.message}</p>
                   )}
-                </div>
+                </motion.div>
 
-                <div>
-                  <label className="block text-xs font-medium text-white/40 mb-1.5">Message</label>
+                <motion.div
+                  initial={{ opacity: 0, y: 10 }}
+                  animate={inView ? { opacity: 1, y: 0 } : {}}
+                  transition={{ delay: 0.45 }}
+                >
+                  <label className="block text-xs font-semibold text-white/50 mb-2 uppercase tracking-wide">Message</label>
                   <textarea
                     rows={5}
                     placeholder="Your message..."
@@ -180,22 +197,45 @@ export default function Contact() {
                       required: 'Message is required',
                       minLength: { value: 20, message: 'Please write at least 20 characters' },
                     })}
-                    className={`w-full bg-card border rounded-lg px-4 py-2.5 text-sm text-text placeholder-white/20 focus:outline-none focus:border-accent/50 transition-colors resize-none ${
+                    className={`w-full bg-card border rounded-lg px-4 py-3 text-sm text-text placeholder-white/20 focus:outline-none focus:border-accent/50 focus:ring-2 focus:ring-accent/20 transition-all duration-200 resize-none ${
                       errors.message ? 'border-rose-500/50' : 'border-white/[0.08]'
                     }`}
                   />
                   {errors.message && (
-                    <p className="text-xs text-rose-400 mt-1">{errors.message.message}</p>
+                    <p className="text-xs text-rose-400 mt-1.5">{errors.message.message}</p>
                   )}
-                </div>
+                </motion.div>
 
-                <button
+                <motion.button
                   type="submit"
                   disabled={isSubmitting}
-                  className="w-full py-3 bg-accent text-white text-sm font-medium rounded-lg hover:bg-accent/90 active:scale-[0.99] transition-all duration-200 disabled:opacity-60 disabled:cursor-not-allowed"
+                  initial={{ opacity: 0, y: 10 }}
+                  animate={inView ? { opacity: 1, y: 0 } : {}}
+                  transition={{ delay: 0.5 }}
+                  whileHover={{ scale: isSubmitting ? 1 : 1.02 }}
+                  whileTap={{ scale: isSubmitting ? 1 : 0.98 }}
+                  className="w-full py-3.5 bg-accent text-white text-sm font-semibold rounded-lg hover:bg-accent/90 transition-all duration-200 disabled:opacity-60 disabled:cursor-not-allowed relative overflow-hidden group"
                 >
-                  {isSubmitting ? 'Sending…' : 'Send message'}
-                </button>
+                  <motion.div
+                    className="absolute inset-0 bg-gradient-to-r from-transparent via-white/20 to-transparent"
+                    initial={{ x: '-100%' }}
+                    animate={isSubmitting ? { x: '100%' } : {}}
+                    transition={{ duration: 0.6, repeat: Infinity }}
+                    style={{ pointerEvents: 'none' }}
+                  />
+                  {isSubmitting ? (
+                    <span className="flex items-center justify-center gap-2 relative z-10">
+                      <motion.div
+                        animate={{ rotate: 360 }}
+                        transition={{ duration: 1, repeat: Infinity, ease: 'linear' }}
+                        className="w-4 h-4 border-2 border-white/30 border-t-white rounded-full"
+                      />
+                      Sending…
+                    </span>
+                  ) : (
+                    <span className="relative z-10">Send message</span>
+                  )}
+                </motion.button>
               </form>
             )}
           </motion.div>
