@@ -33,8 +33,11 @@ export default function Navigation() {
         initial={{ opacity: 0, y: -20 }}
         animate={isVisible ? { opacity: 1, y: 0 } : { opacity: 0, y: -20 }}
         transition={{ duration: 0.3 }}
-        className="fixed top-0 left-0 right-0 z-50 backdrop-blur-md border-b border-white/[0.08]"
-        style={{ background: 'rgba(26,26,46,0.8)' }}
+        className="fixed top-0 left-0 right-0 z-50 backdrop-blur-md border-b"
+        style={{ 
+          background: 'rgba(26,13,58,0.8)',
+          borderColor: 'rgba(196,181,253,0.2)',
+        }}
       >
         <div className="max-w-6xl mx-auto px-6 py-4 flex items-center justify-between">
           <a href="#hero" className="text-sm font-semibold text-accent">
@@ -46,7 +49,7 @@ export default function Navigation() {
               <button
                 key={item.id}
                 onClick={() => scrollToSection(item.id)}
-                className="text-xs font-medium text-white/60 hover:text-accent transition-colors"
+                className="text-xs font-medium text-white/60 hover:text-white hover:drop-shadow-[0_0_8px_rgba(196,181,253,0.6)] transition-all duration-200"
               >
                 {item.label}
               </button>
@@ -55,7 +58,20 @@ export default function Navigation() {
 
           <button
             onClick={() => scrollToSection('contact')}
-            className="text-xs font-medium px-4 py-2 rounded-lg bg-accent/10 text-accent hover:bg-accent/20 transition-colors"
+            className="text-xs font-medium px-4 py-2 rounded-lg transition-all duration-200 hover:scale-105"
+            style={{
+              background: 'linear-gradient(135deg, rgba(196,181,253,0.2) 0%, rgba(167,139,250,0.15) 100%)',
+              color: '#c4b5fd',
+              border: '1px solid rgba(196,181,253,0.4)',
+            }}
+            onMouseEnter={e => {
+              e.currentTarget.style.background = 'linear-gradient(135deg, rgba(196,181,253,0.3) 0%, rgba(167,139,250,0.25) 100%)'
+              e.currentTarget.style.boxShadow = '0 0 16px rgba(196,181,253,0.4)'
+            }}
+            onMouseLeave={e => {
+              e.currentTarget.style.background = 'linear-gradient(135deg, rgba(196,181,253,0.2) 0%, rgba(167,139,250,0.15) 100%)'
+              e.currentTarget.style.boxShadow = 'none'
+            }}
           >
             Contact
           </button>
